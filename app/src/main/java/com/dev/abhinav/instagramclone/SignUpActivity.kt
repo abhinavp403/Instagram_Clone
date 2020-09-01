@@ -11,6 +11,8 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.*
+import kotlin.collections.HashMap
 
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,8 +68,8 @@ class SignUpActivity : AppCompatActivity() {
         val userRef = FirebaseDatabase.getInstance().reference.child("Users")
         val map = HashMap<String, Any>()
         map["uid"] = userID
-        map["fullname"] = fullname
-        map["username"] = username
+        map["fullname"] = fullname.toLowerCase(Locale.ROOT)
+        map["username"] = username.toLowerCase(Locale.ROOT)
         map["email"] = email
         map["bio"] = "Test"
         map["image"] = "https://firebasestorage.googleapis.com/v0/b/instagram-clone-8ae8c.appspot.com/o/Default%20Images%2Fprofile.png?alt=media&token=2517bbf1-ad8d-4198-8625-bb8cc3d29481"
