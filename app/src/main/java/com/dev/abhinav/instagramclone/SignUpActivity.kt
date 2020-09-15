@@ -20,7 +20,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         signin_btn.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
+            startActivity(Intent(this, SignInActivity::class.java))
         }
         
         signup_btn.setOnClickListener {
@@ -71,14 +71,20 @@ class SignUpActivity : AppCompatActivity() {
         map["fullname"] = fullname.toLowerCase(Locale.ROOT)
         map["username"] = username.toLowerCase(Locale.ROOT)
         map["email"] = email
-        map["bio"] = "Test"
+        map["bio"] = ""
         map["image"] = "https://firebasestorage.googleapis.com/v0/b/instagram-clone-8ae8c.appspot.com/o/Default%20Images%2Fprofile.png?alt=media&token=2517bbf1-ad8d-4198-8625-bb8cc3d29481"
 
         userRef.child(userID).setValue(map)
             .addOnCompleteListener { task ->
             if(task.isSuccessful) {
                 progressDialog.dismiss()
-                Toast.makeText(this, "Error: " + "Account Created!", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this, "Error: " + "Account Created!", Toast.LENGTH_LONG).show()
+
+                FirebaseDatabase.getInstance().reference
+                    .child("Follow").child(userID)
+                    .child("Following").child(userID)
+                    .setValue(true)
+
                 val intent = (Intent(this@SignUpActivity, MainActivity::class.java))
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)

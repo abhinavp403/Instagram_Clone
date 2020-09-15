@@ -47,15 +47,15 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <RelativeLayout
         android:id="@+id/scrollview"
         android:layout_below="@+id/app_bar_layout_profile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
@@ -221,7 +221,18 @@
                     android:src="@drawable/save_large_icon"
                     style="?android:buttonBarButtonStyle"/>
             </LinearLayout>
-        </LinearLayout>
 
-    </ScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_upload_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_saved_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

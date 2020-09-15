@@ -38,7 +38,7 @@ class AddPostActivity : AppCompatActivity() {
         }
 
         CropImage.activity()
-            .setAspectRatio(2,1)
+            .setAspectRatio(1,1)
             .start(this@AddPostActivity)
     }
 
@@ -53,22 +53,16 @@ class AddPostActivity : AppCompatActivity() {
 
     private fun uploadImage() {
         when {
-            desc_post.text.toString() == "" -> Toast.makeText(
-                this,
-                "Please write your description",
-                Toast.LENGTH_LONG
-            ).show()
-            imageUri == null -> Toast.makeText(this, "Please select image", Toast.LENGTH_LONG)
-                .show()
+            desc_post.text.toString() == "" -> Toast.makeText(this, "Please write your description", Toast.LENGTH_LONG).show()
+            imageUri == null -> Toast.makeText(this, "Please select image", Toast.LENGTH_LONG).show()
             else -> {
                 val progressDialog = ProgressDialog(this)
                 progressDialog.setTitle("Adding New Post")
                 progressDialog.setMessage("Please wait, we are adding your post...")
                 progressDialog.show()
 
-                //TODO: file extension function
-                val fileref =
-                    storagePostPicRef.child(System.currentTimeMillis().toString() + ".jpg")
+                //TODO: file extension function - video 15 around 16:00
+                val fileref = storagePostPicRef.child(System.currentTimeMillis().toString() + ".jpg")
                 val uploadTask: StorageTask<*>
                 uploadTask = fileref.putFile(imageUri!!)
                 uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
@@ -85,11 +79,12 @@ class AddPostActivity : AppCompatActivity() {
                         uri = downloadUrl.toString()
                         val userRef = FirebaseDatabase.getInstance().reference.child("Posts")
                         val map = HashMap<String, Any>()
-                        map["postid"] = userRef.push().key!!
-                        map["desc"] = desc_post.text.toString().toLowerCase(Locale.ROOT)
+                        val postKey = userRef.push().key!!
+                        map["postid"] = postKey
+                        map["description"] = desc_post.text.toString().toLowerCase(Locale.ROOT)
                         map["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
                         map["postimage"] = uri
-                        userRef.child(userRef.push().key!!).updateChildren(map)
+                        userRef.child(postKey).updateChildren(map)
 
                         Toast.makeText(this, "Post Uploaded Successfully", Toast.LENGTH_LONG).show()
                         val intent = (Intent(this@AddPostActivity, MainActivity::class.java))

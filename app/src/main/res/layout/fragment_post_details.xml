@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.NotificationsFragment">
+    tools:context=".fragments.PostDetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout_notifications"
+        android:id="@+id/app_bar_layout_postdetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/notifications_toolbar"
+            android:id="@+id/postdetails_toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="4dp"
@@ -28,7 +28,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notifications"
+                    android:text="Photo"
                     android:textSize="18sp"
                     android:maxLines="1"
                     android:textStyle="bold"
@@ -39,11 +39,11 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_notifications"
-        android:layout_below="@+id/app_bar_layout_notifications"
+        android:id="@+id/recycler_view_postdetails"
+        android:layout_below="@+id/app_bar_layout_postdetails"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

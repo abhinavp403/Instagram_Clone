@@ -30,7 +30,7 @@ import kotlin.collections.HashMap
 class AccountSettingsActivity : AppCompatActivity() {
 
     private lateinit var firebaseUser: FirebaseUser
-    private lateinit var checker: String
+    private var checker: String = ""
     private lateinit var uri: String
     private var imageUri: Uri? = null
     private lateinit var storageProfilePicRef: StorageReference
