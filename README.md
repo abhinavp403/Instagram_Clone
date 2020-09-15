@@ -7,3 +7,5 @@ Libraries Used-
 2. Firebase Authentication
 3. Firebase Storage
 4. Firebase Database
+5. Picasso
+6. Image Cropper
