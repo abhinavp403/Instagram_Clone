@@ -70,12 +70,11 @@ class NotificationAdapter(private val context: Context, private val notification
         holder.itemView.setOnClickListener {
             if(notification.ispost) {
                 val editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-                editor.putString("profileId", notification.postid)
+                editor.putString("postId", notification.postid)
                 editor.apply()
                 (context as FragmentActivity).supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container, PostDetailsFragment())
-                    //.addToBackStack(null) //TODO: Check this again
                     .commit()
             }
             else {
@@ -85,7 +84,6 @@ class NotificationAdapter(private val context: Context, private val notification
                 (context as FragmentActivity).supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container, ProfileFragment())
-                    //.addToBackStack(null) //TODO: Check this again
                     .commit()
             }
         }
